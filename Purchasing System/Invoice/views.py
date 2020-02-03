@@ -134,7 +134,7 @@ def invoicedetails(request):
     staff_id = request.POST['staff_id']
     vendor_id = request.POST['vendor_id']
     description = request.POST['description']
-    purchaseorder = get_object_or_404(PurchaseOrder)
+    purchase_order = PurchaseOrder.objects.get(purchase_order_id = purchase_order_id)
     staff_info = Person.objects.get(person_id = staff_id)
     vendor_info = Vendor.objects.get(vendor_id = vendor_id)
 
@@ -185,7 +185,7 @@ def invoicedetails(request):
                             person_id = staff_info,
                             description = description,
                             vendor_id = vendor_info, 
-                            purchase_order_id = purchaseorder,
+                            purchase_order_id = purchase_order,
                             )
     inv_info.save()
 
