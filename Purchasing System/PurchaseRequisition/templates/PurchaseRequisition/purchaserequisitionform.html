@@ -1,31 +1,29 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script>
     $(document).ready(function () {
-        var i=1;
-        $("#add_row").click(function(){
-            $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='item_id' type='item_id' placeholder='Item ID' class='form-control input-md'   /> </td><td><input  name='item_name' type='text' placeholder='Item Name'  class='form-control input-md'></td><td><input  name='description' type='text' placeholder='Description'  class='form-control input-md' ></td><td><input name='quantity' type='text' placeholder='Quantity' class='form-control input-md'  /> </td><td><input name='unit_price' type='text' placeholder='Price Per Unit' class='form-control input-md'  /> </td>");
 
-            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-            i++; 
-        });
-        $("#delete_row").click(function(){
-            if(i>1){
-	        $("#addr"+(i-1)).html('');
-	        i--;
-	        }
-        });
+     
+      var i=1;
+     $("#add_row").click(function(){
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='item_id' type='item_id' placeholder='Item ID' class='form-control input-md'   /> </td><td><input  name='item_name' type='text' placeholder='Item Name'  class='form-control input-md'></td><td><input  name='description' type='text' placeholder='Description'  class='form-control input-md' ></td><td><input name='quantity' type='text' placeholder='Quantity' class='form-control input-md'  /> </td><td><input name='unit_price' type='text' placeholder='Price Per Unit' class='form-control input-md'  /> </td>");
+
+      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+      i++; 
+  });
+     $("#delete_row").click(function(){
+    	 if(i>1){
+		 $("#addr"+(i-1)).html('');
+		 i--;
+		 }
+	 });
 
 });
 </script>
 <div class="formpurchaseorder margintop" >
-     {% if messages %}
-	    {% for message in messages %}
-	       <div style="position:fixed; background:rgb(255, 191, 191); border:0.5px solid rgb(116, 47, 47); padding:1em; margin-top:-10px;border-radius:0 0 0.5em 0.5em; margin-left:25%; width:40%;text-align:center;">{{ message }}</div>
-	    {% endfor %}
-    {% endif %}
+
     <form class="purchaseordersubmission" action="purchaserequisitionconfirmation" method="POST">
       {% csrf_token %}
         <div class="row margintop">
