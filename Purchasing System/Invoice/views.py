@@ -40,26 +40,38 @@ def fillinginvoice(request):
     context = {}
     pur_id = request.GET['pur_id']
     inv_id = random.randint(1000000,9999999)
-    try: 
-        purchase_orders = PurchaseOrder.objects.get(purchase_order_id = pur_id)
-        item_list = PurchaseOrderItem.objects.filter(purchase_order_id = pur_id)
-        context = {
-                'title': 'Invoice Form',
-                'invoice_id': 'INV' + str(inv_id),
-                'purchase_order_id': inv_id, 
-                'staff_id' : purchase_orders.person_id.person_id,
-                'vendor_id': purchase_orders.vendor_id.vendor_id,
-                'rows':item_list
-            }
 
-        responsesItems = render(request,'Invoice/invoiceform.html',context).content
+    try: 
+
+        invoice = Invoice.objects.get(purchase_order_id = pur_id)
+        print(invoice)
+
+        context = { 'error': 'The invoice is already Issued! Invoice Number: ' + invoice.invoice_id,
+                    'title': 'Invoice Form'
+            }
         return render(request,'Invoice/invoiceform.html',context)
 
     except Invoice.DoesNotExist:
+        try: 
+            purchase_orders = PurchaseOrder.objects.get(purchase_order_id = pur_id)
+            item_list = PurchaseOrderItem.objects.filter(purchase_order_id = pur_id)
+            context = {
+                    'title': 'Invoice Form',
+                    'invoice_id': 'INV' + str(inv_id),
+                    'purchase_order_id': purchase_orders, 
+                    'staff_id' : purchase_orders.person_id.person_id,
+                    'vendor_id': purchase_orders.vendor_id.vendor_id,
+                    'rows':item_list
+                }
 
-        context = { 'error': 'The invoice id is invalid !',
-                    'title': 'Invoice Form'
-            }
+            responsesItems = render(request,'Invoice/invoiceform.html',context).content
+            return render(request,'Invoice/invoiceform.html',context)
+
+        except PurchaseOrder.DoesNotExist:
+
+            context = { 'error': 'The invoice id is invalid !',
+                        'title': 'Invoice Form'
+                }
         return render(request,'Invoice/invoiceform.html',context)
 
 def invoiceconfirmation(request):
