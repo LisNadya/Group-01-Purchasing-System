@@ -86,6 +86,7 @@ def purchaserequisitionconfirmation(request):
             }
             items.append(item_table)
             i = i + 1
+
             grand_total = grand_total + total
     except:
         messages.error(request, 'Invalid data type')
