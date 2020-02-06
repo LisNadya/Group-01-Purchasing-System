@@ -19,6 +19,7 @@ from django.http.request import QueryDict
 from decimal import Decimal
 from django.shortcuts import redirect
 from django.contrib import messages
+
 import random
 import datetime 
 
@@ -74,7 +75,6 @@ def purchaserequisitionconfirmation(request):
     grand_total = Decimal(0)
 
     try:
-        while i < items_length:
             total= Decimal(quantity[i]) * Decimal(unit_price[i])
             item_table = {
                 'item_name': items_name[i],
@@ -86,13 +86,13 @@ def purchaserequisitionconfirmation(request):
             }
             items.append(item_table)
             i = i + 1
-        grand_total = grand_total + total
+
+            grand_total = grand_total + total
     except:
         messages.error(request, 'Invalid data type')
         return redirect('/purchaserequisitionform')
 
     print(items)
-
     context = {
             'title': 'Purchase Requisition Confirmation',
             'purchase_requisition_id' : pr_id,
