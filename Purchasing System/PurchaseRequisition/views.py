@@ -73,8 +73,11 @@ def purchaserequisitionconfirmation(request):
     i = 0
     items_length = len(items_id)
     grand_total = Decimal(0)
-
+    
     try:
+        while(True):
+            if(i==items_length):
+                break
             total= Decimal(quantity[i]) * Decimal(unit_price[i])
             item_table = {
                 'item_name': items_name[i],
@@ -86,7 +89,6 @@ def purchaserequisitionconfirmation(request):
             }
             items.append(item_table)
             i = i + 1
-
             grand_total = grand_total + total
     except:
         messages.error(request, 'Invalid data type')
@@ -98,9 +100,9 @@ def purchaserequisitionconfirmation(request):
             'purchase_requisition_id' : pr_id,
             'person_id' : person_id,
             'grand_total': grand_total,
-            'rows' : items,
+            'rows' : items
   
-        }
+    }
 
     return render(request,'PurchaseRequisition/purchaserequisitionconfirmation.html',context)
 
