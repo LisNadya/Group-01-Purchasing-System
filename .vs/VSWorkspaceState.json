@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "\\Purchasing System\\app",
+    "\\Purchasing System\\app\\templates",
+    "\\Purchasing System\\app\\templates\\app"
   ],
   "PreviewInSolutionExplorer": false
 }
