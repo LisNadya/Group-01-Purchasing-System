@@ -15,6 +15,7 @@
                 <label class="labelpodetails">Delivery Order ID</label>
                 <input type="text" class="form-control" name="delivery_order_id" value="{{delivery_order_id}}" readonly>
             </div>
+<a href="deliveryorderdetails.html">deliveryorderdetails.html</a>
             <div class="col">
                 <label class="labelpodetails">Purchase Order ID</label>
               <input type="text" class="form-control" name="purchase_order_id" value="{{purchase_order_id}}" readonly>
@@ -39,21 +40,21 @@
             </div>
         </div>
 
-        <table class="table table-striped margintop">
+         <table class="table table-striped margintop">
           <thead>
-            <tr>
-              <th scope="col">Item ID</th>
-              <th scope="col">Item</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Price Per Unit (RM)</th>
-              <th scope="col">Total (RM)</th>
+            <tr> 
+              <th scope="col" class="fontlabel">Item ID</th>
+              <th scope="col" class="fontlabel">Item</th>
+              <th scope="col" class="fontlabel">Quantity</th>
+              <th scope="col" class="fontlabel">Price Per Unit (RM)</th>
+              <th scope="col" class="fontlabel">Total (RM)</th>
             </tr>
           </thead>
           <tbody>
               {% for r in rows %}
             <tr>
                  <td>{{r.item_id}}</td>
-                 <td>{{r.item_name}}</td>
+                 <td>{{r.item_id.item_name}}</td>
                  <td>{{r.quantity}}</td>
                  <td>{{r.unit_price}}</td>
                  <td>{{r.total_price}}</td>
@@ -66,7 +67,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <th>Grand Total</th>
+                  <th class="fontlabel">Grand Total</th>
                   <td>{{grand_total}}</td>
               </tr>
           </tfoot>
